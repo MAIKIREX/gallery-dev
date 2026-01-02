@@ -35,16 +35,25 @@ export default function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
             style={style}
           >
             <code className="block min-w-full whitespace-pre px-4 py-4">
-              {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line, key: i })} className="table-row">
-                  <span className="table-cell select-none pr-4 text-right text-xs text-gray-500">{i + 1}</span>
-                  <span className="table-cell">
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
-                  </span>
-                </div>
-              ))}
+              {tokens.map((line, i) => {
+                const { key: _lineKey, className: lineClassName, ...lineProps } = getLineProps({ line })
+
+                return (
+                  <div
+                    key={i}
+                    {...lineProps}
+                    className={[lineClassName, "table-row"].filter(Boolean).join(" ")}
+                  >
+                    <span className="table-cell select-none pr-4 text-right text-xs text-gray-500">{i + 1}</span>
+                    <span className="table-cell">
+                      {line.map((token, tokenIndex) => {
+                        const { key: _tokenKey, ...tokenProps } = getTokenProps({ token })
+                        return <span key={tokenIndex} {...tokenProps} />
+                      })}
+                    </span>
+                  </div>
+                )
+              })}
             </code>
           </pre>
         )}
