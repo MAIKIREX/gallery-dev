@@ -1,8 +1,12 @@
 import Link from "next/link"
+import { ModeToggle } from "@/components/mode-toggle"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center dark">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center relative">
+      <div className="absolute top-4 right-4">
+        <ModeToggle />
+      </div>
       <div className="max-w-2xl mx-auto px-6 text-center">
         <h1 className="text-5xl font-bold text-foreground mb-4">Maiki UI Gallery</h1>
         <p className="text-xl text-muted-foreground mb-8">A comprehensive collection of Tailwind CSS UI components</p>
