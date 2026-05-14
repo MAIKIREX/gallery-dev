@@ -5,7 +5,8 @@ import { carouselsSection } from "./sections/carousels"
 import { herosSection } from "./sections/heros"
 import { loginsSection } from "./sections/logins"
 import { navbarsSection } from "./sections/navbars"
+import { textsSection } from "./sections/texts"
 
 export const galleryData: GalleryData = {
-  sections: [cardsSection, navbarsSection, buttonsSection, herosSection, loginsSection, carouselsSection],
+  sections: [cardsSection, navbarsSection, buttonsSection, herosSection, loginsSection, carouselsSection, textsSection],
 }
