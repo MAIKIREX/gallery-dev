@@ -22,7 +22,7 @@ export default function BrowseDashboard() {
         />
         <main className="flex-1 min-w-0">
           <Topbar title="UI Components" subtitle="Browse our collection of beautiful Tailwind CSS components" />
-          <div className="p-8">
+          <div className="pt-4">
             {currentSection && (
               <CollectionList collections={currentSection.collections} sectionId={currentSection.id} />
             )}

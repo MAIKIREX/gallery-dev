@@ -7,12 +7,12 @@ interface TopbarProps {
 
 export default function Topbar({ title, subtitle }: TopbarProps) {
   return (
-    <div className="flex items-center justify-between border-b border-gray-200 bg-white px-8 py-6 dark:border-gray-800 dark:bg-gray-900">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{title}</h1>
-        {subtitle && <p className="mt-2 text-gray-600 dark:text-gray-400">{subtitle}</p>}
+    <div className="flex items-end justify-between px-12 py-16">
+      <div className="max-w-2xl">
+        <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-50 mb-3">{title}</h1>
+        {subtitle && <p className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-[65ch]">{subtitle}</p>}
       </div>
-      <div>
+      <div className="pb-2">
         <ModeToggle />
       </div>
     </div>

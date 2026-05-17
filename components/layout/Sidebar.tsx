@@ -1,6 +1,5 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useSidebarStore } from "@/lib/stores/sidebar-store"
 
@@ -26,45 +25,50 @@ export default function Sidebar({ sections, activeSection, onSectionChange }: Si
   return (
     <aside
       className={cn(
-        "sticky top-0 h-screen border-r border-gray-200 bg-white transition-[width] duration-200 dark:border-gray-700 dark:bg-gray-800",
-        collapsed ? "w-20 p-3" : "w-64 p-6",
+        "sticky top-0 h-[100dvh] transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        collapsed ? "w-20 px-2 py-8" : "w-72 px-8 py-10",
       )}
-      data-collapsed={collapsed ? "true" : "false"}
     >
-      <div className={cn("mb-6 flex items-center", collapsed ? "justify-center" : "justify-between")}>
-        <h2 className={cn("text-lg font-bold text-gray-900 dark:text-white", collapsed && "sr-only")}>
-          Categories
+      <div className={cn("mb-12 flex items-center", collapsed ? "justify-center" : "justify-between")}>
+        <h2 className={cn("text-xs tracking-widest font-semibold uppercase text-zinc-400 dark:text-zinc-500", collapsed && "sr-only")}>
+          Index
         </h2>
         <button
           type="button"
           onClick={toggleCollapsed}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          aria-expanded={!collapsed}
-          className="inline-flex size-9 items-center justify-center rounded-md border border-gray-200 text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="inline-flex size-8 items-center justify-center rounded-full text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
         >
-          {collapsed ? <ChevronRight className="size-4" /> : <ChevronLeft className="size-4" />}
+          {collapsed ? (
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 3.5L10 7.5L5.5 11.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          ) : (
+             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3.5L5 7.5L9.5 11.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          )}
         </button>
       </div>
-      <nav className="space-y-2">
+      <nav className="space-y-4">
         {sections.map((section) => {
           const initials = getInitials(section.name)
+          const isActive = activeSection === section.id
           return (
             <button
               key={section.id}
               onClick={() => onSectionChange(section.id)}
               title={collapsed ? section.name : undefined}
               className={cn(
-                "flex w-full items-center rounded-lg py-2.5 text-left text-sm font-medium transition-colors",
-                collapsed ? "justify-center px-2" : "gap-3 px-4",
-                activeSection === section.id
-                  ? "bg-blue-500 text-white"
-                  : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700",
+                "flex w-full items-center text-left text-sm transition-all duration-300",
+                collapsed ? "justify-center" : "gap-4",
+                isActive
+                  ? "text-zinc-900 font-medium dark:text-zinc-50"
+                  : "text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-300",
               )}
             >
               <span className={cn("truncate", collapsed && "sr-only")}>{section.name}</span>
-              <span aria-hidden className={cn("text-xs font-semibold uppercase", !collapsed && "hidden")}>
+              <span aria-hidden className={cn("text-xs font-medium uppercase tracking-wider", !collapsed && "hidden")}>
                 {initials}
               </span>
+              {!collapsed && isActive && (
+                <span className="ml-auto size-1.5 rounded-full bg-zinc-900 dark:bg-zinc-50" />
+              )}
             </button>
           )
         })}
